@@ -27,6 +27,14 @@
     --radius: 12px;
     --radius2: 8px;
     --header-height: 64px;
+
+    /* Mood Colors for Calendar Dots */
+    --mood-happy: #27ae60;
+    --mood-sad: #e74c3c;
+    --mood-angry: #f39c12;
+    --mood-love: #e84393;
+    --mood-sleep: #8e44ad;
+    --mood-think: #3498db;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,6 +45,8 @@
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   ::-webkit-scrollbar { width: 6px; }
@@ -122,10 +132,10 @@
   .btn-secondary:hover { background: var(--primary-light); border-color: var(--primary); }
 
   .btn-danger { background: #ffeaea; color: #d32f2f; border: 1px solid #ffcccc; }
-  .btn-danger:hover { background: #d32f2f; color: white; }
+  .btn-danger:hover { background: #d32f2f; color: white; border-color: #d32f2f; }
 
   .btn-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-  .btn-success:hover { background: #2e7d32; color: white; }
+  .btn-success:hover { background: #2e7d32; color: white; border-color: #2e7d32; }
 
   .btn-sm { padding: 8px 14px; font-size: 12px; }
 
@@ -168,14 +178,16 @@
   .mobile-nav {
     display: none; position: absolute; top: var(--header-height); left: 0; width: 100%;
     background: var(--bg2); border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow2); flex-direction: column; padding: 12px;
+    box-shadow: var(--shadow2); flex-direction: column; padding: 12px 16px;
     z-index: 99;
   }
   .mobile-nav.active { display: flex; }
   .mobile-nav .header-btn { width: 100%; justify-content: flex-start; padding: 12px; margin-bottom: 6px; }
 
-  /* ========== LAYOUT ========== */
-  .main-layout { display: flex; min-height: calc(100vh - var(--header-height)); }
+  /* ========== CONTENT WRAPPER ========== */
+  .content-wrapper {
+    flex: 1; display: flex; min-height: calc(100vh - var(--header-height));
+  }
 
   /* ========== SIDEBAR ========== */
   .sidebar {
@@ -226,11 +238,19 @@
   .calendar-day.other-month { color: var(--text3); opacity: 0.4; }
   .calendar-day.today { background: var(--primary); color: white; font-weight: 700; }
   .calendar-day.selected { background: var(--accent); color: white; font-weight: 700; }
+
+  /* Calendar Mood Dots */
   .calendar-day.has-note::after {
-    content: ''; position: absolute; bottom: 4px; width: 4px; height: 4px;
-    background: var(--accent2); border-radius: 50%;
+    content: ''; position: absolute; bottom: 4px; width: 6px; height: 6px;
+    border-radius: 50%;
   }
-  .calendar-day.today.has-note::after { background: white; }
+  .calendar-day.mood-happy::after { background: var(--mood-happy); box-shadow: 0 0 4px var(--mood-happy); }
+  .calendar-day.mood-sad::after { background: var(--mood-sad); box-shadow: 0 0 4px var(--mood-sad); }
+  .calendar-day.mood-angry::after { background: var(--mood-angry); box-shadow: 0 0 4px var(--mood-angry); }
+  .calendar-day.mood-love::after { background: var(--mood-love); box-shadow: 0 0 4px var(--mood-love); }
+  .calendar-day.mood-sleep::after { background: var(--mood-sleep); box-shadow: 0 0 4px var(--mood-sleep); }
+  .calendar-day.mood-think::after { background: var(--mood-think); box-shadow: 0 0 4px var(--mood-think); }
+  .calendar-day.today.has-note::after { background: white; box-shadow: 0 0 4px rgba(255,255,255,0.8); }
 
   /* ========== SEARCH & LIST ========== */
   .search-box { position: relative; }
@@ -276,11 +296,11 @@
   .mood-selector { display: flex; gap: 6px; align-items: center; }
   .mood-selector span { font-size: 12px; color: var(--text3); margin-right: 4px; }
   .mood-btn {
-    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
-    background: var(--card); cursor: pointer; font-size: 16px; color: var(--text2);
+    width: 38px; height: 38px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); cursor: pointer; font-size: 18px; color: var(--text2);
     display: flex; align-items: center; justify-content: center; transition: all 0.2s;
   }
-  .mood-btn:hover, .mood-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+  .mood-btn:hover, .mood-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); transform: scale(1.1); }
 
   .editor-textarea {
     flex: 1; min-height: 380px; width: 100%; padding: 20px;
@@ -312,7 +332,7 @@
     padding: 28px; width: 440px; max-width: 90vw; box-shadow: var(--shadow);
     animation: fadeInUp 0.25s ease;
   }
-  .modal h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 6px; color: var(--text); }
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 6px; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .modal p { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
   .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 
@@ -332,9 +352,39 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
+  /* ========== FOOTER ========== */
+  .site-footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .footer-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--accent), var(--primary), transparent);
+    margin-bottom: 14px;
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+  .footer-text {
+    font-size: 13px;
+    color: var(--text3);
+    letter-spacing: 0.5px;
+  }
+  .footer-text .dev-name {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .footer-text i {
+    margin-right: 6px;
+    color: var(--accent);
+    font-size: 12px;
+  }
+
   /* ========== RESPONSIVE ========== */
   @media (max-width: 900px) {
-    .main-layout { flex-direction: column; }
+    .content-wrapper { flex-direction: column; }
     .sidebar { width: 100%; min-width: unset; max-height: unset; position: relative; top: 0; border-right: none; border-bottom: 1px solid var(--border); }
     .editor-area { padding: 20px; }
   }
@@ -385,7 +435,7 @@
     <div class="header-right">
       <button class="header-btn" onclick="showNewNote()"><i class="fas fa-plus"></i> New Entry</button>
       <button class="header-btn" onclick="exportData()"><i class="fas fa-file-export"></i> Export</button>
-      <button class="header-btn" onclick="document.getElementById('importFile').click()"><i class="fas fa-file-import"></i> Import</button>
+      <button class="header-btn" onclick="triggerImport()"><i class="fas fa-file-import"></i> Import</button>
       <button class="header-btn" onclick="logout()"><i class="fas fa-lock"></i> Lock</button>
     </div>
     <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
@@ -394,11 +444,11 @@
   <nav class="mobile-nav" id="mobileNav">
     <button class="header-btn" onclick="showNewNote(); closeMobileMenu()"><i class="fas fa-plus"></i> New Entry</button>
     <button class="header-btn" onclick="exportData(); closeMobileMenu()"><i class="fas fa-file-export"></i> Export JSON</button>
-    <button class="header-btn" onclick="document.getElementById('importFile').click(); closeMobileMenu()"><i class="fas fa-file-import"></i> Import JSON</button>
+    <button class="header-btn" onclick="triggerImport(); closeMobileMenu()"><i class="fas fa-file-import"></i> Import JSON</button>
     <button class="header-btn" onclick="logout(); closeMobileMenu()"><i class="fas fa-lock"></i> Lock Diary</button>
   </nav>
 
-  <div class="main-layout">
+  <div class="content-wrapper">
     <aside class="sidebar">
       <div class="stats-bar">
         <div class="stat-item"><div class="stat-value" id="totalEntries">0</div><div class="stat-label">Entries</div></div>
@@ -415,7 +465,7 @@
             <button class="calendar-nav-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="calendar-weekdays">
-            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
           </div>
           <div class="calendar-days" id="calendarDays"></div>
         </div>
@@ -477,6 +527,14 @@
       </div>
     </main>
   </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <i class="fas fa-code"></i> Designed & Developed by <span class="dev-name">Dilakshana</span>
+    </div>
+  </footer>
 </div>
 
 <!-- MODALS -->
@@ -505,6 +563,9 @@
   </div>
 </div>
 
+<!-- HIDDEN FILE INPUT FOR IMPORT -->
+<input type="file" id="importFileInput" class="file-input-hidden" accept=".json" onchange="importData(event)">
+
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
@@ -514,6 +575,7 @@
   let currentMood = '';
   let calendarDate = new Date();
   const DEFAULT_PASSWORD = 'Dila2007';
+
   const MOOD_MAP = {
     smile: '<i class="fas fa-face-smile"></i>',
     frown: '<i class="fas fa-face-frown"></i>',
@@ -521,6 +583,15 @@
     love: '<i class="fas fa-face-grin-hearts"></i>',
     sleep: '<i class="fas fa-bed"></i>',
     think: '<i class="fas fa-face-meh"></i>'
+  };
+
+  const MOOD_CLASS_MAP = {
+    smile: 'mood-happy',
+    frown: 'mood-sad',
+    angry: 'mood-angry',
+    love: 'mood-love',
+    sleep: 'mood-sleep',
+    think: 'mood-think'
   };
 
   // ==================== INIT ====================
@@ -624,15 +695,29 @@
     const content = document.getElementById('noteContent').value.trim();
     if (!date) return showToast('Please select a date', 'error');
     if (!title && !content) return showToast('Please write something before saving', 'error');
-    notes[date] = { title: title || 'Untitled Entry', content, mood: currentMood, createdAt: notes[date]?.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() };
+    notes[date] = {
+      title: title || 'Untitled Entry',
+      content,
+      mood: currentMood,
+      createdAt: notes[date]?.createdAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
     saveNotesToStorage(); currentNoteDate = date;
     renderNotesList(); renderCalendar(); updateStats();
     showToast('Entry saved successfully', 'success');
   }
 
-  function deleteCurrentNote() { if(currentNoteDate && notes[currentNoteDate]) document.getElementById('deleteModal').classList.add('active'); else showToast('No entry to delete', 'error'); }
+  function deleteCurrentNote() {
+    if(currentNoteDate && notes[currentNoteDate]) document.getElementById('deleteModal').classList.add('active');
+    else showToast('No entry to delete', 'error');
+  }
   function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('active'); }
-  function confirmDelete() { if(currentNoteDate && notes[currentNoteDate]) { delete notes[currentNoteDate]; saveNotesToStorage(); showNewNote(); renderNotesList(); renderCalendar(); updateStats(); showToast('Entry deleted', 'info'); } closeDeleteModal(); }
+  function confirmDelete() {
+    if(currentNoteDate && notes[currentNoteDate]) {
+      delete notes[currentNoteDate]; saveNotesToStorage(); showNewNote(); renderNotesList(); renderCalendar(); updateStats(); showToast('Entry deleted', 'info');
+    }
+    closeDeleteModal();
+  }
 
   function selectNoteFromList(date) { openNoteEditor(date); }
 
@@ -641,19 +726,49 @@
     const y = calendarDate.getFullYear(), m = calendarDate.getMonth();
     const names = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('calendarMonthYear').textContent = `${names[m]} ${y}`;
-    const fd = new Date(y, m, 1).getDay(), dim = new Date(y, m + 1, 0).getDate(), dp = new Date(y, m, 0).getDate();
+
+    const firstDayOfMonth = new Date(y, m, 1).getDay(); // 0=Sun, 1=Mon...
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+    const daysInPrevMonth = new Date(y, m, 0).getDate();
     const todayStr = new Date().toISOString().split('T')[0];
-    let h = '';
-    for (let i = fd - 1; i >= 0; i--) h += `<div class="calendar-day other-month">${dp - i}</div>`;
-    for (let d = 1; d <= dim; d++) {
-      const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      let c = 'calendar-day';
-      if(ds===todayStr) c+=' today'; if(ds===currentNoteDate) c+=' selected'; if(notes[ds]) c+=' has-note';
-      h += `<div class="${c}" onclick="selectDate('${ds}')">${d}</div>`;
+
+    // Convert to Monday-based: Mon=0, Tue=1, ..., Sun=6
+    const mondayOffset = (firstDayOfMonth + 6) % 7;
+
+    let html = '';
+
+    // Previous month days (fill before Monday start)
+    for (let i = mondayOffset - 1; i >= 0; i--) {
+      html += `<div class="calendar-day other-month">${daysInPrevMonth - i}</div>`;
     }
-    const rem = 42 - (fd + dim); for(let i=1;i<=rem&&fd+dim+i<=42;i++) h+=`<div class="calendar-day other-month">${i}</div>`;
-    document.getElementById('calendarDays').innerHTML = h;
+
+    // Current month days
+    for (let d = 1; d <= daysInMonth; d++) {
+      const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      let classes = 'calendar-day';
+      if (ds === todayStr) classes += ' today';
+      if (ds === currentNoteDate) classes += ' selected';
+
+      const note = notes[ds];
+      if (note) {
+        classes += ' has-note';
+        if (note.mood && MOOD_CLASS_MAP[note.mood]) {
+          classes += ' ' + MOOD_CLASS_MAP[note.mood];
+        }
+      }
+      html += `<div class="${classes}" onclick="selectDate('${ds}')">${d}</div>`;
+    }
+
+    // Next month days to fill grid
+    const totalCells = mondayOffset + daysInMonth;
+    const remaining = (totalCells <= 42 ? 42 : 49) - totalCells;
+    for (let i = 1; i <= remaining; i++) {
+      html += `<div class="calendar-day other-month">${i}</div>`;
+    }
+
+    document.getElementById('calendarDays').innerHTML = html;
   }
+
   function changeMonth(d) { calendarDate.setMonth(calendarDate.getMonth() + d); renderCalendar(); }
   function selectDate(d) { openNoteEditor(d); }
 
@@ -662,7 +777,12 @@
     const el = document.getElementById('notesList');
     const sorted = Object.keys(notes).sort((a,b) => b.localeCompare(a));
     const filt = filter ? sorted.filter(d => { const n=notes[d]; return n.title.toLowerCase().includes(filter)||n.content.toLowerCase().includes(filter); }) : sorted;
-    if(!filt.length) { el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px;">${filter?'No matching entries':'No entries yet. Start writing!'}</div>`; return; }
+
+    if (!filt.length) {
+      el.innerHTML = `<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px;">${filter?'No matching entries':'No entries yet. Start writing!'}</div>`;
+      return;
+    }
+
     el.innerHTML = filt.map(date => {
       const n = notes[date], d = new Date(date+'T00:00:00');
       const label = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
@@ -700,44 +820,87 @@
   }
 
   // ==================== IMPORT/EXPORT ====================
+  function triggerImport() {
+    document.getElementById('importFileInput').click();
+  }
+
   function exportData() {
-    const data = { version:'1.0', exportDate:new Date().toISOString(), notes, passwordSet:!!localStorage.getItem('diary_password') };
-    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const data = {
+      version: '1.0',
+      exportDate: new Date().toISOString(),
+      password: localStorage.getItem('diary_password') || '',
+      notes: notes
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
     a.download = `diary-backup-${new Date().toISOString().split('T')[0]}.json`; a.click(); URL.revokeObjectURL(a.href);
     showToast('Diary exported successfully', 'success');
   }
 
   function importData(e) {
-    const f = e.target.files[0]; if(!f) return;
-    const r = new FileReader();
-    r.onload = function(ev) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
       try {
-        const d = JSON.parse(ev.target.result);
-        if(d.notes && typeof d.notes==='object') {
-          notes = {...notes, ...d.notes}; saveNotesToStorage(); renderCalendar(); renderNotesList(); updateStats();
-          if(currentNoteDate && notes[currentNoteDate]) openNoteEditor(currentNoteDate);
-          showToast(`Imported ${Object.keys(d.notes).length} entries`, 'success');
-        } else showToast('Invalid diary format', 'error');
-      } catch(err) { showToast('Error reading file: '+err.message, 'error'); }
-    }; r.readAsText(f); e.target.value='';
+        const data = JSON.parse(ev.target.result);
+        if (data.notes && typeof data.notes === 'object') {
+          // Complete restore: clear existing data and import
+          notes = {};
+          Object.assign(notes, data.notes);
+
+          // Also restore password if included
+          if (data.password) {
+            localStorage.setItem('diary_password', data.password);
+            loadPassword();
+          }
+
+          saveNotesToStorage();
+          renderCalendar();
+          renderNotesList();
+          updateStats();
+
+          if (currentNoteDate && notes[currentNoteDate]) {
+            openNoteEditor(currentNoteDate);
+          } else {
+            showNewNote();
+          }
+
+          const count = Object.keys(data.notes).length;
+          showToast(`Successfully restored ${count} entries from backup`, 'success');
+        } else {
+          showToast('Invalid diary file format', 'error');
+        }
+      } catch(err) {
+        showToast('Error reading file: ' + err.message, 'error');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = ''; // reset so same file can be re-imported
   }
 
   // ==================== TOAST & UI ====================
   function showToast(msg, type='info') {
-    const c = document.getElementById('toastContainer'), t = document.createElement('div');
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
     t.className = `toast ${type}`;
     const icons = {success:'<i class="fas fa-check-circle"></i>', error:'<i class="fas fa-times-circle"></i>', info:'<i class="fas fa-info-circle"></i>'};
     t.innerHTML = `${icons[type]||icons.info}<span>${msg}</span>`;
-    c.appendChild(t); setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(20px)'; t.style.transition='all 0.3s'; setTimeout(()=>t.remove(),300); }, 3000);
+    c.appendChild(t);
+    setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(20px)'; t.style.transition='all 0.3s'; setTimeout(()=>t.remove(),300); }, 3000);
   }
 
   function escHtml(t) { const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
 
   function setupMobileMenu() {
-    const btn = document.getElementById('hamburgerBtn');
-    const nav = document.getElementById('mobileNav');
-    btn.addEventListener('click', () => nav.classList.toggle('active'));
+    document.getElementById('hamburgerBtn').addEventListener('click', () => document.getElementById('mobileNav').classList.toggle('active'));
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
   }
   function closeMobileMenu() { document.getElementById('mobileNav').classList.remove('active'); }
 
