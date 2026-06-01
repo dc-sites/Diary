@@ -3,40 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Personal Diary</title>
+<title>Professional Diary</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600&display=swap');
-
   :root {
-    --primary: #6c5ce7;
-    --primary-dark: #5a4bd1;
-    --primary-light: #a29bfe;
-    --accent: #fd79a8;
-    --accent2: #00cec9;
-    --bg: #0f0f1a;
-    --bg2: #1a1a2e;
-    --bg3: #16213e;
-    --card: #1e1e32;
-    --card2: #252542;
-    --text: #e8e8f0;
-    --text2: #a0a0b8;
-    --text3: #6c6c8a;
-    --border: #2d2d4a;
-    --shadow: 0 8px 32px rgba(0,0,0,0.4);
-    --shadow2: 0 4px 16px rgba(0,0,0,0.3);
-    --radius: 16px;
-    --radius2: 12px;
-    --gradient1: linear-gradient(135deg, #6c5ce7, #a29bfe);
-    --gradient2: linear-gradient(135deg, #fd79a8, #e84393);
-    --gradient3: linear-gradient(135deg, #00cec9, #55efc4);
-    --gradient4: linear-gradient(135deg, #0f0f1a, #1a1a2e, #16213e);
+    --primary: #4a6cf7;
+    --primary-dark: #3b5de7;
+    --primary-light: #e8eaff;
+    --accent: #e84393;
+    --accent2: #00b894;
+    --bg: #f8f9fa;
+    --bg2: #ffffff;
+    --card: #ffffff;
+    --card2: #f1f3f5;
+    --text: #1a1a2e;
+    --text2: #555555;
+    --text3: #888888;
+    --border: #e0e0e0;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow2: 0 2px 10px rgba(0,0,0,0.06);
+    --gradient1: linear-gradient(135deg, #4a6cf7, #6a8cff);
+    --radius: 12px;
+    --radius2: 8px;
+    --header-height: 64px;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Inter', sans-serif;
@@ -46,957 +39,380 @@
     overflow-x: hidden;
   }
 
-  body::before {
-    content: '';    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(108,92,231,0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(253,121,168,0.06) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba(0,206,201,0.04) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ========== SCROLLBAR ========== */
   ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg2); }
-  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
 
   /* ========== LOGIN SCREEN ========== */
   #loginScreen {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    background: var(--bg);
-  }
-
-  #loginScreen .login-bg {
-    position: absolute;
-    width: 100%; height: 100%;
-    background:
-      radial-gradient(circle at 30% 40%, rgba(108,92,231,0.15) 0%, transparent 50%),
-      radial-gradient(circle at 70% 60%, rgba(253,121,168,0.1) 0%, transparent 50%);
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000; background: var(--bg);
   }
 
   .login-card {
-    position: relative;
-    background: var(--card);
+    background: var(--bg2);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 50px 40px;
-    width: 420px;
-    max-width: 90vw;
+    border-radius: 16px;
+    padding: 48px 36px;
+    width: 400px; max-width: 90vw;
     box-shadow: var(--shadow);
     text-align: center;
-    animation: fadeInUp 0.8s ease;
+    animation: fadeInUp 0.5s ease;
   }
 
-  @keyframes fadeInUp {    from { opacity: 0; transform: translateY(30px); }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .login-icon {
-    width: 80px; height: 80px;
-    margin: 0 auto 24px;
+    width: 64px; height: 64px; margin: 0 auto 20px;
     background: var(--gradient1);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-    box-shadow: 0 8px 24px rgba(108,92,231,0.4);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: white;
   }
 
   .login-card h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    margin-bottom: 8px;
-    background: var(--gradient1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 26px; margin-bottom: 6px; color: var(--text);
   }
 
-  .login-card p {
-    color: var(--text2);
-    margin-bottom: 32px;
-    font-size: 14px;
-  }
+  .login-card p { color: var(--text3); margin-bottom: 28px; font-size: 14px; }
 
-  .input-group {
-    position: relative;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-
+  .input-group { margin-bottom: 18px; text-align: left; }
   .input-group label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text2);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--text3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
   }
 
   .input-group input, .input-group textarea, .input-group select {
-    width: 100%;
-    padding: 14px 16px;    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    transition: all 0.3s;
-    outline: none;
+    width: 100%; padding: 12px 14px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius2); color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 14px;
+    transition: all 0.2s; outline: none;
   }
 
-  .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(108,92,231,0.2);
+  .input-group input:focus, .input-group textarea:focus {
+    border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .input-group textarea {
-    min-height: 250px;
-    resize: vertical;
-    font-family: 'Caveat', cursive;
-    font-size: 20px;
-    line-height: 1.8;
+    min-height: 280px; resize: vertical;
+    font-family: 'Caveat', cursive; font-size: 20px; line-height: 1.7;
   }
 
   .btn {
-    padding: 14px 28px;
-    border: none;
-    border-radius: var(--radius2);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    padding: 12px 24px; border: none; border-radius: var(--radius2);
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
   }
 
   .btn-primary {
-    background: var(--gradient1);
-    color: white;
-    width: 100%;
-    justify-content: center;
-    box-shadow: 0 4px 16px rgba(108,92,231,0.3);
+    background: var(--gradient1); color: white; width: 100%; justify-content: center;
+    box-shadow: 0 4px 12px rgba(74,108,247,0.25);
   }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(74,108,247,0.35); }
 
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(108,92,231,0.5);
-  }
-  .btn-secondary {
-    background: var(--card2);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--primary-light); border-color: var(--primary); }
 
-  .btn-secondary:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-  }
+  .btn-danger { background: #ffeaea; color: #d32f2f; border: 1px solid #ffcccc; }
+  .btn-danger:hover { background: #d32f2f; color: white; }
 
-  .btn-accent {
-    background: var(--gradient2);
-    color: white;
-  }
+  .btn-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+  .btn-success:hover { background: #2e7d32; color: white; }
 
-  .btn-accent:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(253,121,168,0.4);
-  }
+  .btn-sm { padding: 8px 14px; font-size: 12px; }
 
-  .btn-success {
-    background: var(--gradient3);
-    color: #0f0f1a;
-  }
+  .login-error { color: #d32f2f; font-size: 13px; margin-top: 12px; display: none; }
 
-  .btn-success:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(0,206,201,0.4);
-  }
-
-  .btn-sm {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  .login-error {
-    color: var(--accent);
-    font-size: 13px;
-    margin-top: 12px;
-    display: none;
-  }
-
-  /* ========== MAIN APP ========== */
-  #app {
-    display: none;
-    position: relative;
-    z-index: 1;
-  }
   /* ========== HEADER ========== */
   .header {
-    background: rgba(30,30,50,0.8);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 0 24px; height: var(--header-height);
+    display: flex; align-items: center; justify-content: space-between;
   }
 
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
+  .header-left { display: flex; align-items: center; gap: 12px; }
   .header-logo {
-    width: 42px; height: 42px;
-    background: var(--gradient1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    width: 36px; height: 36px; background: var(--gradient1);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 16px;
   }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text); }
+  .header-sub { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 1.5px; }
 
-  .header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    background: var(--gradient1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .header-subtitle {
-    font-size: 11px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;  }
-
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .header-btn {
-    padding: 10px 16px;
-    background: var(--card2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text2);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    padding: 8px 14px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius2); color: var(--text2); font-size: 13px;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
     font-family: 'Inter', sans-serif;
   }
+  .header-btn:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+  .header-btn i { font-size: 14px; }
 
-  .header-btn:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+  .hamburger {
+    display: none; width: 36px; height: 36px; background: var(--bg);
+    border: 1px solid var(--border); border-radius: var(--radius2);
+    color: var(--text2); cursor: pointer; align-items: center; justify-content: center;
+    font-size: 16px;
   }
 
-  .header-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+  .mobile-nav {
+    display: none; position: absolute; top: var(--header-height); left: 0; width: 100%;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow2); flex-direction: column; padding: 12px;
+    z-index: 99;
   }
+  .mobile-nav.active { display: flex; }
+  .mobile-nav .header-btn { width: 100%; justify-content: flex-start; padding: 12px; margin-bottom: 6px; }
 
   /* ========== LAYOUT ========== */
-  .main-layout {
-    display: flex;
-    min-height: calc(100vh - 74px);
-  }
+  .main-layout { display: flex; min-height: calc(100vh - var(--header-height)); }
 
   /* ========== SIDEBAR ========== */
   .sidebar {
-    width: 340px;
-    min-width: 340px;
-    background: rgba(26,26,46,0.6);
-    border-right: 1px solid var(--border);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
-    max-height: calc(100vh - 74px);
-    position: sticky;
-    top: 74px;
+    width: 320px; min-width: 320px; background: var(--bg2);
+    border-right: 1px solid var(--border); padding: 20px;
+    display: flex; flex-direction: column; gap: 16px;
+    overflow-y: auto; max-height: calc(100vh - var(--header-height));
+    position: sticky; top: var(--header-height);
   }
+
   .sidebar-section h3 {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text3);
-    margin-bottom: 12px;
-  }
-
-  /* ========== CALENDAR ========== */
-  .calendar-container {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-
-  .calendar-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
-  .calendar-nav h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--text);
-  }
-
-  .calendar-nav-btn {
-    width: 32px; height: 32px;
-    background: var(--card2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: all 0.2s;
-  }
-
-  .calendar-nav-btn:hover {
-    background: var(--primary);
-    color: white;
-  }
-
-  .calendar-weekdays {    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    margin-bottom: 8px;
-  }
-
-  .calendar-weekdays span {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text3);
-    padding: 8px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-  }
-
-  .calendar-day {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    font-weight: 500;
-    color: var(--text2);
-  }
-
-  .calendar-day:hover {
-    background: var(--card2);
-    color: var(--text);
-  }
-
-  .calendar-day.other-month {
-    color: var(--text3);
-    opacity: 0.4;
-  }
-
-  .calendar-day.today {
-    background: var(--gradient1);
-    color: white;
-    font-weight: 700;    box-shadow: 0 4px 12px rgba(108,92,231,0.4);
-  }
-
-  .calendar-day.selected {
-    background: var(--accent);
-    color: white;
-    font-weight: 700;
-  }
-
-  .calendar-day.has-note::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    width: 4px; height: 4px;
-    background: var(--accent2);
-    border-radius: 50%;
-  }
-
-  .calendar-day.today.has-note::after {
-    background: white;
-  }
-
-  /* ========== SEARCH ========== */
-  .search-box {
-    position: relative;
-  }
-
-  .search-box input {
-    width: 100%;
-    padding: 12px 16px 12px 40px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-size: 13px;
-    outline: none;
-    transition: all 0.3s;
-  }
-
-  .search-box input:focus {
-    border-color: var(--primary);
-  }
-
-  .search-box::before {
-    content: '🔍';
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;  }
-
-  /* ========== NOTES LIST ========== */
-  .notes-list {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .note-item {
-    padding: 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .note-item:hover {
-    border-color: var(--primary);
-    transform: translateX(4px);
-  }
-
-  .note-item.active {
-    border-color: var(--primary);
-    background: var(--card2);
-  }
-
-  .note-item-date {
-    font-size: 11px;
-    color: var(--primary-light);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .note-item-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .note-item-preview {
-    font-size: 12px;
-    color: var(--text3);    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 4px;
-  }
-
-  /* ========== EDITOR ========== */
-  .editor-area {
-    flex: 1;
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .editor-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .editor-date-picker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .editor-date-picker label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .editor-date-picker input[type="date"] {
-    padding: 10px 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    outline: none;
-  }
-
-  .editor-date-picker input[type="date"]:focus {
-    border-color: var(--primary);  }
-
-  .editor-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .editor-title-input {
-    width: 100%;
-    padding: 16px 20px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    outline: none;
-    transition: all 0.3s;
-  }
-
-  .editor-title-input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(108,92,231,0.15);
-  }
-
-  .editor-title-input::placeholder {
-    color: var(--text3);
-  }
-
-  .editor-textarea {
-    flex: 1;
-    min-height: 400px;
-    width: 100%;
-    padding: 24px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    line-height: 1.8;
-    outline: none;
-    resize: vertical;
-    transition: all 0.3s;
-  }
-
-  .editor-textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(108,92,231,0.15);
-  }
-  .editor-textarea::placeholder {
-    color: var(--text3);
-  }
-
-  .editor-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .word-count {
-    font-size: 12px;
-    color: var(--text3);
-  }
-
-  .mood-selector {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .mood-selector span {
-    font-size: 12px;
-    color: var(--text3);
-    margin-right: 4px;
-  }
-
-  .mood-btn {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-
-  .mood-btn:hover, .mood-btn.active {
-    border-color: var(--primary);
-    background: var(--card2);
-    transform: scale(1.15);
-  }
-
-  /* ========== MODAL ========== */  .modal-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-  }
-
-  .modal-overlay.active {
-    display: flex;
-  }
-
-  .modal {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-    width: 480px;
-    max-width: 90vw;
-    box-shadow: var(--shadow);
-    animation: fadeInUp 0.3s ease;
-  }
-
-  .modal h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-    background: var(--gradient1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .modal p {
-    color: var(--text2);
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
-
-  .modal-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 24px;
-  }
-
-  /* ========== TOAST ========== */  .toast-container {
-    position: fixed;
-    top: 90px;
-    right: 24px;
-    z-index: 600;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .toast {
-    padding: 14px 20px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    color: var(--text);
-    font-size: 13px;
-    box-shadow: var(--shadow2);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: slideIn 0.3s ease;
-    min-width: 280px;
-  }
-
-  .toast.success { border-left: 4px solid var(--accent2); }
-  .toast.error { border-left: 4px solid var(--accent); }
-  .toast.info { border-left: 4px solid var(--primary); }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text3); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
   }
 
   /* ========== STATS ========== */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
+  .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .stat-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    padding: 16px;
-    text-align: center;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius2); padding: 12px 8px; text-align: center;
+  }
+  .stat-value {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--primary);
+  }
+  .stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+  /* ========== CALENDAR ========== */
+  .calendar-container { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .calendar-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .calendar-nav h4 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--text); }
+  .calendar-nav-btn {
+    width: 30px; height: 30px; background: var(--bg); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text2); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .calendar-nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+  .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 6px; }
+  .calendar-weekdays span { text-align: center; font-size: 10px; font-weight: 600; color: var(--text3); padding: 6px 0; }
+
+  .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .calendar-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; font-size: 13px; cursor: pointer; transition: all 0.2s;
+    position: relative; font-weight: 500; color: var(--text2);
+  }
+  .calendar-day:hover { background: var(--primary-light); color: var(--primary); }
+  .calendar-day.other-month { color: var(--text3); opacity: 0.4; }
+  .calendar-day.today { background: var(--primary); color: white; font-weight: 700; }
+  .calendar-day.selected { background: var(--accent); color: white; font-weight: 700; }
+  .calendar-day.has-note::after {
+    content: ''; position: absolute; bottom: 4px; width: 4px; height: 4px;
+    background: var(--accent2); border-radius: 50%;
+  }
+  .calendar-day.today.has-note::after { background: white; }
+
+  /* ========== SEARCH & LIST ========== */
+  .search-box { position: relative; }
+  .search-box input {
+    width: 100%; padding: 10px 14px 10px 36px; background: var(--card);
+    border: 1px solid var(--border); border-radius: var(--radius2); color: var(--text); font-size: 13px;
+  }
+  .search-box::before {
+    content: '\f002'; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--text3);
   }
 
-  .stat-value {    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    background: var(--gradient1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .notes-list { flex: 1; overflow-y: auto; max-height: 280px; display: flex; flex-direction: column; gap: 6px; }
+  .note-item {
+    padding: 12px; background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius2); cursor: pointer; transition: all 0.2s;
   }
+  .note-item:hover { border-color: var(--primary); transform: translateX(3px); }
+  .note-item.active { border-color: var(--primary); background: var(--primary-light); }
+  .note-item-date { font-size: 11px; color: var(--primary); font-weight: 600; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
+  .note-item-title { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .note-item-preview { font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; }
 
-  .stat-label {
-    font-size: 11px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
+  /* ========== EDITOR ========== */
+  .editor-area { flex: 1; padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+  .editor-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .editor-date-picker { display: flex; align-items: center; gap: 8px; }
+  .editor-date-picker label { font-size: 12px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+  .editor-date-picker input[type="date"] {
+    padding: 8px 10px; background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius2); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;
   }
+  .editor-actions { display: flex; gap: 8px; }
+
+  .editor-title-input {
+    width: 100%; padding: 14px 18px; background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius2); color: var(--text); font-family: 'Playfair Display', serif;
+    font-size: 26px; outline: none; transition: all 0.2s;
+  }
+  .editor-title-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+  .editor-title-input::placeholder { color: var(--text3); }
+
+  .mood-selector { display: flex; gap: 6px; align-items: center; }
+  .mood-selector span { font-size: 12px; color: var(--text3); margin-right: 4px; }
+  .mood-btn {
+    width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); cursor: pointer; font-size: 16px; color: var(--text2);
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .mood-btn:hover, .mood-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+  .editor-textarea {
+    flex: 1; min-height: 380px; width: 100%; padding: 20px;
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius2);
+    color: var(--text); font-family: 'Caveat', cursive; font-size: 20px; line-height: 1.7;
+    outline: none; resize: vertical; transition: all 0.2s;
+  }
+  .editor-textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+  .editor-textarea::placeholder { color: var(--text3); }
+
+  .editor-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .word-count { font-size: 12px; color: var(--text3); }
 
   /* ========== EMPTY STATE ========== */
-  .empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    text-align: center;
-  }
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; text-align: center; }
+  .empty-state .icon { font-size: 48px; color: var(--text3); margin-bottom: 16px; }
+  .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); margin-bottom: 8px; }
+  .empty-state p { color: var(--text3); font-size: 14px; }
 
-  .empty-state .icon {
-    font-size: 64px;
-    margin-bottom: 16px;
+  /* ========== MODAL ========== */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);
+    display: none; align-items: center; justify-content: center; z-index: 500;
   }
-
-  .empty-state h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--text);
-    margin-bottom: 8px;
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; width: 440px; max-width: 90vw; box-shadow: var(--shadow);
+    animation: fadeInUp 0.25s ease;
   }
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 6px; color: var(--text); }
+  .modal p { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
 
-  .empty-state p {
-    color: var(--text3);
-    font-size: 14px;
+  /* ========== TOAST ========== */
+  .toast-container { position: fixed; top: 80px; right: 20px; z-index: 600; display: flex; flex-direction: column; gap: 8px; }
+  .toast {
+    padding: 12px 16px; background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius2); color: var(--text); font-size: 13px;
+    box-shadow: var(--shadow2); display: flex; align-items: center; gap: 10px;
+    animation: slideIn 0.3s ease; min-width: 260px;
+  }
+  .toast.success { border-left: 4px solid var(--accent2); }
+  .toast.error { border-left: 4px solid #d32f2f; }
+  .toast.info { border-left: 4px solid var(--primary); }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   /* ========== RESPONSIVE ========== */
   @media (max-width: 900px) {
-    .main-layout {
-      flex-direction: column;
-    }
-    .sidebar {
-      width: 100%;      min-width: unset;
-      max-height: unset;
-      position: relative;
-      top: 0;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-    .editor-area {
-      padding: 20px;
-    }
+    .main-layout { flex-direction: column; }
+    .sidebar { width: 100%; min-width: unset; max-height: unset; position: relative; top: 0; border-right: none; border-bottom: 1px solid var(--border); }
+    .editor-area { padding: 20px; }
   }
 
-  @media (max-width: 600px) {
-    .header {
-      padding: 12px 16px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .header-right {
-      flex-wrap: wrap;
-    }
-    .sidebar {
-      padding: 16px;
-    }
-    .editor-title-input {
-      font-size: 20px;
-    }
-    .editor-textarea {
-      font-size: 18px;
-      min-height: 300px;
-    }
+  @media (max-width: 768px) {
+    .header { padding: 0 16px; }
+    .header-right { display: none; }
+    .hamburger { display: flex; }
+    .sidebar { padding: 16px; }
+    .editor-title-input { font-size: 22px; }
+    .editor-textarea { font-size: 18px; min-height: 320px; }
+    .calendar-container { padding: 12px; }
   }
 
-  /* ========== FILE INPUT ========== */
-  .file-input-hidden {
-    display: none;
-  }
-
-  /* ========== VIEW TOGGLE ========== */
-  .view-toggle {
-    display: flex;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius2);
-    overflow: hidden;
-  }
-
-  .view-toggle button {
-    padding: 8px 14px;
-    background: none;    border: none;
-    color: var(--text3);
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .view-toggle button.active {
-    background: var(--primary);
-    color: white;
-  }
-
-  /* ========== TAG ========== */
-  .tag {
-    display: inline-block;
-    padding: 3px 10px;
-    background: rgba(108,92,231,0.15);
-    color: var(--primary-light);
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .tag.mood-tag {
-    background: rgba(253,121,168,0.15);
-    color: var(--accent);
-  }
-
-  /* ========== CHANGE PASSWORD ========== */
-  .change-pw-section {
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-  }
-
-  /* ========== FADE ANIMATION ========== */
-  .fade-in {
-    animation: fadeIn 0.4s ease;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  .file-input-hidden { display: none; }
 </style>
 </head>
 <body>
 
-<!-- ========== LOGIN SCREEN ========== --><div id="loginScreen">
-  <div class="login-bg"></div>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
   <div class="login-card">
-    <div class="login-icon">📔</div>
-    <h1>My Diary</h1>
-    <p>Your personal space for thoughts & memories</p>
+    <div class="login-icon"><i class="fas fa-book-open"></i></div>
+    <h1>Personal Diary</h1>
+    <p>Secure & private journaling space</p>
     <div class="input-group">
       <label>Password</label>
-      <input type="password" id="loginPassword" placeholder="Enter your password" onkeydown="if(event.key==='Enter')attemptLogin()">
+      <input type="password" id="loginPassword" placeholder="Enter access password" onkeydown="if(event.key==='Enter')attemptLogin()">
     </div>
-    <button class="btn btn-primary" onclick="attemptLogin()">🔓 Unlock Diary</button>
-    <div class="login-error" id="loginError">❌ Incorrect password. Try again.</div>
-    <div style="margin-top:16px;">
-      <button class="btn btn-secondary btn-sm" onclick="clearSavedPassword()" id="clearPwBtn" style="display:none;">🗑️ Clear Saved Password</button>
+    <button class="btn btn-primary" onclick="attemptLogin()"><i class="fas fa-unlock-alt"></i> Unlock Diary</button>
+    <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> Incorrect password. Try again.</div>
+    <div style="margin-top:14px;">
+      <button class="btn btn-secondary btn-sm" onclick="clearSavedPassword()" id="clearPwBtn" style="display:none;"><i class="fas fa-trash"></i> Clear Saved Password</button>
     </div>
   </div>
 </div>
 
-<!-- ========== MAIN APP ========== -->
+<!-- MAIN APP -->
 <div id="app">
-
-  <!-- HEADER -->
   <header class="header">
     <div class="header-left">
-      <div class="header-logo">📔</div>
+      <div class="header-logo"><i class="fas fa-book"></i></div>
       <div>
-        <h1>My Diary</h1>
-        <div class="header-subtitle">Personal Journal</div>
+        <h1>Diary</h1>
+        <div class="header-sub">Professional Journal</div>
       </div>
     </div>
     <div class="header-right">
-      <button class="header-btn" onclick="showNewNote()">✨ New Entry</button>
-      <button class="header-btn" onclick="exportData()">📤 Export JSON</button>
-      <button class="header-btn" onclick="document.getElementById('importFile').click()">📥 Import JSON</button>
-      <input type="file" id="importFile" class="file-input-hidden" accept=".json" onchange="importData(event)">
-      <button class="header-btn" onclick="logout()">🔒 Lock</button>
+      <button class="header-btn" onclick="showNewNote()"><i class="fas fa-plus"></i> New Entry</button>
+      <button class="header-btn" onclick="exportData()"><i class="fas fa-file-export"></i> Export</button>
+      <button class="header-btn" onclick="document.getElementById('importFile').click()"><i class="fas fa-file-import"></i> Import</button>
+      <button class="header-btn" onclick="logout()"><i class="fas fa-lock"></i> Lock</button>
     </div>
+    <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
   </header>
 
-  <!-- MAIN LAYOUT -->
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="header-btn" onclick="showNewNote(); closeMobileMenu()"><i class="fas fa-plus"></i> New Entry</button>
+    <button class="header-btn" onclick="exportData(); closeMobileMenu()"><i class="fas fa-file-export"></i> Export JSON</button>
+    <button class="header-btn" onclick="document.getElementById('importFile').click(); closeMobileMenu()"><i class="fas fa-file-import"></i> Import JSON</button>
+    <button class="header-btn" onclick="logout(); closeMobileMenu()"><i class="fas fa-lock"></i> Lock Diary</button>
+  </nav>
+
   <div class="main-layout">
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-
-      <!-- Stats -->
       <div class="stats-bar">
-        <div class="stat-item">
-          <div class="stat-value" id="totalEntries">0</div>
-          <div class="stat-label">Entries</div>        </div>
-        <div class="stat-item">
-          <div class="stat-value" id="totalWords">0</div>
-          <div class="stat-label">Words</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value" id="streak">0</div>
-          <div class="stat-label">Streak</div>
-        </div>
+        <div class="stat-item"><div class="stat-value" id="totalEntries">0</div><div class="stat-label">Entries</div></div>
+        <div class="stat-item"><div class="stat-value" id="totalWords">0</div><div class="stat-label">Words</div></div>
+        <div class="stat-item"><div class="stat-value" id="streak">0</div><div class="stat-label">Streak</div></div>
       </div>
 
-      <!-- Calendar -->
       <div class="sidebar-section">
-        <h3>📅 Calendar</h3>
+        <h3><i class="fas fa-calendar-alt"></i> Calendar</h3>
         <div class="calendar-container">
           <div class="calendar-nav">
-            <button class="calendar-nav-btn" onclick="changeMonth(-1)">◀</button>
+            <button class="calendar-nav-btn" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
             <h4 id="calendarMonthYear"></h4>
-            <button class="calendar-nav-btn" onclick="changeMonth(1)">▶</button>
+            <button class="calendar-nav-btn" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
           </div>
           <div class="calendar-weekdays">
             <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
@@ -1005,42 +421,37 @@
         </div>
       </div>
 
-      <!-- Search -->
       <div class="sidebar-section">
-        <h3>🔍 Search</h3>
-        <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search entries..." oninput="filterNotes()">
-        </div>
+        <h3><i class="fas fa-search"></i> Search</h3>
+        <div class="search-box"><input type="text" id="searchInput" placeholder="Search entries..." oninput="filterNotes()"></div>
       </div>
 
-      <!-- Notes List -->
       <div class="sidebar-section" style="flex:1; display:flex; flex-direction:column; min-height:0;">
-        <h3>📝 Entries</h3>
+        <h3><i class="fas fa-list-ul"></i> Entries</h3>
         <div class="notes-list" id="notesList"></div>
       </div>
 
-      <!-- Change Password -->
-      <div class="change-pw-section">
-        <button class="header-btn" onclick="showChangePassword()" style="width:100%; justify-content:center;">🔑 Change Password</button>
+      <div style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border);">
+        <button class="header-btn" onclick="showChangePassword()" style="width:100%; justify-content:center;"><i class="fas fa-key"></i> Change Password</button>
       </div>
     </aside>
 
-    <!-- EDITOR -->
     <main class="editor-area" id="editorArea">
-      <div class="empty-state" id="emptyState">        <div class="icon">📖</div>
+      <div class="empty-state" id="emptyState">
+        <div class="icon"><i class="fas fa-book-open"></i></div>
         <h3>Welcome to Your Diary</h3>
         <p>Select a date from the calendar or click "New Entry" to begin writing</p>
       </div>
 
-      <div id="editorForm" style="display:none; flex-direction:column; gap:20px; flex:1;">
+      <div id="editorForm" style="display:none; flex-direction:column; gap:18px; flex:1;">
         <div class="editor-header">
           <div class="editor-date-picker">
             <label>Date:</label>
             <input type="date" id="noteDate" onchange="onDateChange()">
           </div>
           <div class="editor-actions">
-            <button class="btn btn-secondary btn-sm" onclick="deleteCurrentNote()">🗑️ Delete</button>
-            <button class="btn btn-primary btn-sm" onclick="saveNote()">💾 Save</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteCurrentNote()"><i class="fas fa-trash"></i> Delete</button>
+            <button class="btn btn-success btn-sm" onclick="saveNote()"><i class="fas fa-save"></i> Save</button>
           </div>
         </div>
 
@@ -1048,66 +459,52 @@
 
         <div class="mood-selector">
           <span>Mood:</span>
-          <button class="mood-btn" onclick="setMood('😊')" data-mood="😊">😊</button>
-          <button class="mood-btn" onclick="setMood('😢')" data-mood="😢">😢</button>
-          <button class="mood-btn" onclick="setMood('😡')" data-mood="😡">😡</button>
-          <button class="mood-btn" onclick="setMood('😍')" data-mood="😍">😍</button>
-          <button class="mood-btn" onclick="setMood('😴')" data-mood="😴">😴</button>
-          <button class="mood-btn" onclick="setMood('🤔')" data-mood="🤔">🤔</button>
-          <button class="mood-btn" onclick="setMood('😎')" data-mood="😎">😎</button>
-          <button class="mood-btn" onclick="setMood('🥰')" data-mood="🥰">🥰</button>
+          <button class="mood-btn" onclick="setMood('smile')" data-mood="smile" title="Happy"><i class="fas fa-face-smile"></i></button>
+          <button class="mood-btn" onclick="setMood('frown')" data-mood="frown" title="Sad"><i class="fas fa-face-frown"></i></button>
+          <button class="mood-btn" onclick="setMood('angry')" data-mood="angry" title="Angry"><i class="fas fa-face-angry"></i></button>
+          <button class="mood-btn" onclick="setMood('love')" data-mood="love" title="In Love"><i class="fas fa-face-grin-hearts"></i></button>
+          <button class="mood-btn" onclick="setMood('sleep')" data-mood="sleep" title="Tired"><i class="fas fa-bed"></i></button>
+          <button class="mood-btn" onclick="setMood('think')" data-mood="think" title="Thinking"><i class="fas fa-face-meh"></i></button>
         </div>
 
         <textarea class="editor-textarea" id="noteContent" placeholder="Write your thoughts here..." oninput="updateWordCount()"></textarea>
 
         <div class="editor-footer">
-          <div class="word-count" id="wordCount">0 words · 0 characters</div>
+          <div class="word-count" id="wordCount">0 words &middot; 0 characters</div>
           <div id="noteMoodDisplay"></div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn btn-success btn-sm" onclick="saveNote()">💾 Save Entry</button>
-          </div>
+          <button class="btn btn-success btn-sm" onclick="saveNote()"><i class="fas fa-save"></i> Save Entry</button>
         </div>
       </div>
     </main>
   </div>
 </div>
 
-<!-- ========== CHANGE PASSWORD MODAL ========== -->
+<!-- MODALS -->
 <div class="modal-overlay" id="changePwModal">
   <div class="modal">
-    <h2>🔑 Change Password</h2>
-    <p>Enter your current password and set a new one.</p>    <div class="input-group">
-      <label>Current Password</label>
-      <input type="password" id="currentPwInput" placeholder="Enter current password">
-    </div>
-    <div class="input-group">
-      <label>New Password</label>
-      <input type="password" id="newPwInput" placeholder="Enter new password">
-    </div>
-    <div class="input-group">
-      <label>Confirm New Password</label>
-      <input type="password" id="confirmPwInput" placeholder="Confirm new password">
-    </div>
+    <h2><i class="fas fa-key"></i> Change Password</h2>
+    <p>Verify your identity and set a new secure password.</p>
+    <div class="input-group"><label>Current Password</label><input type="password" id="currentPwInput" placeholder="Enter current password"></div>
+    <div class="input-group"><label>New Password</label><input type="password" id="newPwInput" placeholder="Enter new password"></div>
+    <div class="input-group"><label>Confirm New Password</label><input type="password" id="confirmPwInput" placeholder="Confirm new password"></div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeChangePassword()">Cancel</button>
-      <button class="btn btn-primary" onclick="changePassword()" style="width:auto;">Change Password</button>
+      <button class="btn btn-primary" onclick="changePassword()" style="width:auto;">Update Password</button>
     </div>
   </div>
 </div>
 
-<!-- ========== DELETE CONFIRM MODAL ========== -->
 <div class="modal-overlay" id="deleteModal">
   <div class="modal">
-    <h2>🗑️ Delete Entry</h2>
-    <p>Are you sure you want to delete this diary entry? This action cannot be undone.</p>
+    <h2><i class="fas fa-trash-alt"></i> Delete Entry</h2>
+    <p>Are you sure you want to permanently delete this diary entry? This action cannot be undone.</p>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
-      <button class="btn btn-accent" onclick="confirmDelete()">Delete</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete Permanently</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST CONTAINER -->
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
@@ -1116,49 +513,44 @@
   let currentNoteDate = null;
   let currentMood = '';
   let calendarDate = new Date();
-  let editingDate = null;
-
   const DEFAULT_PASSWORD = 'Dila2007';
+  const MOOD_MAP = {
+    smile: '<i class="fas fa-face-smile"></i>',
+    frown: '<i class="fas fa-face-frown"></i>',
+    angry: '<i class="fas fa-face-angry"></i>',
+    love: '<i class="fas fa-face-grin-hearts"></i>',
+    sleep: '<i class="fas fa-bed"></i>',
+    think: '<i class="fas fa-face-meh"></i>'
+  };
 
   // ==================== INIT ====================
   function init() {
     loadPassword();
     loadNotes();
-    const savedLogin = localStorage.getItem('diary_logged_in');
-    if (savedLogin === 'true') {      showApp();
-    }
+    if (localStorage.getItem('diary_logged_in') === 'true') showApp();
+    setupMobileMenu();
   }
 
   // ==================== PASSWORD ====================
   function loadPassword() {
-    const savedPw = localStorage.getItem('diary_password');
-    if (savedPw) {
-      document.getElementById('clearPwBtn').style.display = 'inline-flex';
-    }
+    if (localStorage.getItem('diary_password')) document.getElementById('clearPwBtn').style.display = 'inline-flex';
   }
-
-  function getPassword() {
-    const savedPw = localStorage.getItem('diary_password');
-    return savedPw ? savedPw : DEFAULT_PASSWORD;
-  }
+  function getPassword() { return localStorage.getItem('diary_password') || DEFAULT_PASSWORD; }
 
   function attemptLogin() {
     const input = document.getElementById('loginPassword').value;
-    const correct = getPassword();
-    if (input === correct) {
+    if (input === getPassword()) {
       localStorage.setItem('diary_logged_in', 'true');
       showApp();
-      showToast('Welcome back! ✨', 'success');
+      showToast('Successfully logged in', 'success');
     } else {
       document.getElementById('loginError').style.display = 'block';
-      setTimeout(() => {
-        document.getElementById('loginError').style.display = 'none';
-      }, 3000);
+      setTimeout(() => document.getElementById('loginError').style.display = 'none', 3000);
     }
   }
 
   function clearSavedPassword() {
-    if (confirm('Remove saved password from local storage? You will need to enter the password each time.')) {
+    if (confirm('Remove saved password from local storage?')) {
       localStorage.removeItem('diary_password');
       document.getElementById('clearPwBtn').style.display = 'none';
       showToast('Saved password cleared', 'info');
@@ -1172,366 +564,183 @@
     document.getElementById('loginPassword').value = '';
   }
 
-  function showChangePassword() {
-    document.getElementById('changePwModal').classList.add('active');
-  }
+  function showChangePassword() { document.getElementById('changePwModal').classList.add('active'); }
   function closeChangePassword() {
     document.getElementById('changePwModal').classList.remove('active');
-    document.getElementById('currentPwInput').value = '';
-    document.getElementById('newPwInput').value = '';
-    document.getElementById('confirmPwInput').value = '';
+    ['currentPwInput','newPwInput','confirmPwInput'].forEach(id => document.getElementById(id).value = '');
   }
 
   function changePassword() {
-    const current = document.getElementById('currentPwInput').value;
-    const newPw = document.getElementById('newPwInput').value;
-    const confirm = document.getElementById('confirmPwInput').value;
-
-    if (current !== getPassword()) {
-      showToast('Current password is incorrect', 'error');
-      return;
-    }
-    if (newPw.length < 4) {
-      showToast('Password must be at least 4 characters', 'error');
-      return;
-    }
-    if (newPw !== confirm) {
-      showToast('Passwords do not match', 'error');
-      return;
-    }
-
-    localStorage.setItem('diary_password', newPw);
+    const curr = document.getElementById('currentPwInput').value;
+    const newP = document.getElementById('newPwInput').value;
+    const conf = document.getElementById('confirmPwInput').value;
+    if (curr !== getPassword()) return showToast('Current password is incorrect', 'error');
+    if (newP.length < 4) return showToast('Password must be at least 4 characters', 'error');
+    if (newP !== conf) return showToast('Passwords do not match', 'error');
+    localStorage.setItem('diary_password', newP);
     closeChangePassword();
-    showToast('Password changed successfully! 🔑', 'success');
+    showToast('Password updated successfully', 'success');
   }
 
   // ==================== APP ====================
   function showApp() {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    renderCalendar();
-    renderNotesList();
-    updateStats();
-    showNewNote();
+    renderCalendar(); renderNotesList(); updateStats(); showNewNote();
   }
 
   // ==================== NOTES CRUD ====================
   function loadNotes() {
     const saved = localStorage.getItem('diary_notes');
-    if (saved) {
-      try { notes = JSON.parse(saved); } catch(e) { notes = {}; }
-    }
+    if (saved) { try { notes = JSON.parse(saved); } catch(e) { notes = {}; } }
   }
+  function saveNotesToStorage() { localStorage.setItem('diary_notes', JSON.stringify(notes)); }
 
-  function saveNotesToStorage() {    localStorage.setItem('diary_notes', JSON.stringify(notes));
-  }
-
-  function showNewNote() {
-    const today = new Date().toISOString().split('T')[0];
-    openNoteEditor(today);
-  }
+  function showNewNote() { openNoteEditor(new Date().toISOString().split('T')[0]); }
 
   function openNoteEditor(date) {
-    editingDate = date;
     currentNoteDate = date;
     document.getElementById('emptyState').style.display = 'none';
     document.getElementById('editorForm').style.display = 'flex';
     document.getElementById('noteDate').value = date;
-
-    const existing = notes[date];
-    if (existing) {
-      document.getElementById('noteTitle').value = existing.title || '';
-      document.getElementById('noteContent').value = existing.content || '';
-      currentMood = existing.mood || '';
-      updateMoodButtons();
-      updateMoodDisplay();
+    const ex = notes[date];
+    if (ex) {
+      document.getElementById('noteTitle').value = ex.title || '';
+      document.getElementById('noteContent').value = ex.content || '';
+      currentMood = ex.mood || '';
     } else {
       document.getElementById('noteTitle').value = '';
       document.getElementById('noteContent').value = '';
       currentMood = '';
-      updateMoodButtons();
-      updateMoodDisplay();
     }
-    updateWordCount();
-    renderNotesList();
-    renderCalendar();
+    updateMoodUI(); updateWordCount(); renderNotesList(); renderCalendar();
   }
 
-  function onDateChange() {
-    const newDate = document.getElementById('noteDate').value;
-    if (newDate) openNoteEditor(newDate);
-  }
+  function onDateChange() { const d = document.getElementById('noteDate').value; if(d) openNoteEditor(d); }
 
   function saveNote() {
     const date = document.getElementById('noteDate').value;
     const title = document.getElementById('noteTitle').value.trim();
     const content = document.getElementById('noteContent').value.trim();
-
-    if (!date) {
-      showToast('Please select a date', 'error');
-      return;
-    }
-    if (!title && !content) {
-      showToast('Please write something before saving', 'error');      return;
-    }
-
-    notes[date] = {
-      title: title || 'Untitled Entry',
-      content: content,
-      mood: currentMood,
-      createdAt: notes[date] ? (notes[date].createdAt || new Date().toISOString()) : new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-
-    saveNotesToStorage();
-    editingDate = date;
-    currentNoteDate = date;
-    renderNotesList();
-    renderCalendar();
-    updateStats();
-    showToast('Entry saved successfully! 💾', 'success');
+    if (!date) return showToast('Please select a date', 'error');
+    if (!title && !content) return showToast('Please write something before saving', 'error');
+    notes[date] = { title: title || 'Untitled Entry', content, mood: currentMood, createdAt: notes[date]?.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() };
+    saveNotesToStorage(); currentNoteDate = date;
+    renderNotesList(); renderCalendar(); updateStats();
+    showToast('Entry saved successfully', 'success');
   }
 
-  function deleteCurrentNote() {
-    const date = currentNoteDate;
-    if (!date || !notes[date]) {
-      showToast('No entry to delete', 'error');
-      return;
-    }
-    document.getElementById('deleteModal').classList.add('active');
-  }
+  function deleteCurrentNote() { if(currentNoteDate && notes[currentNoteDate]) document.getElementById('deleteModal').classList.add('active'); else showToast('No entry to delete', 'error'); }
+  function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('active'); }
+  function confirmDelete() { if(currentNoteDate && notes[currentNoteDate]) { delete notes[currentNoteDate]; saveNotesToStorage(); showNewNote(); renderNotesList(); renderCalendar(); updateStats(); showToast('Entry deleted', 'info'); } closeDeleteModal(); }
 
-  function closeDeleteModal() {
-    document.getElementById('deleteModal').classList.remove('active');
-  }
+  function selectNoteFromList(date) { openNoteEditor(date); }
 
-  function confirmDelete() {
-    const date = currentNoteDate;
-    if (notes[date]) {
-      delete notes[date];
-      saveNotesToStorage();
-      showNewNote();
-      renderNotesList();
-      renderCalendar();
-      updateStats();
-      showToast('Entry deleted', 'info');
-    }
-    closeDeleteModal();
-  }
-
-  function selectNoteFromList(date) {
-    openNoteEditor(date);
-  }
   // ==================== CALENDAR ====================
   function renderCalendar() {
-    const year = calendarDate.getFullYear();
-    const month = calendarDate.getMonth();
-    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    document.getElementById('calendarMonthYear').textContent = `${monthNames[month]} ${year}`;
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const daysInPrevMonth = new Date(year, month, 0).getDate();
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
-
-    let html = '';
-
-    // Previous month days
-    for (let i = firstDay - 1; i >= 0; i--) {
-      const day = daysInPrevMonth - i;
-      html += `<div class="calendar-day other-month">${day}</div>`;
+    const y = calendarDate.getFullYear(), m = calendarDate.getMonth();
+    const names = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('calendarMonthYear').textContent = `${names[m]} ${y}`;
+    const fd = new Date(y, m, 1).getDay(), dim = new Date(y, m + 1, 0).getDate(), dp = new Date(y, m, 0).getDate();
+    const todayStr = new Date().toISOString().split('T')[0];
+    let h = '';
+    for (let i = fd - 1; i >= 0; i--) h += `<div class="calendar-day other-month">${dp - i}</div>`;
+    for (let d = 1; d <= dim; d++) {
+      const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      let c = 'calendar-day';
+      if(ds===todayStr) c+=' today'; if(ds===currentNoteDate) c+=' selected'; if(notes[ds]) c+=' has-note';
+      h += `<div class="${c}" onclick="selectDate('${ds}')">${d}</div>`;
     }
-
-    // Current month days
-    for (let d = 1; d <= daysInMonth; d++) {
-      const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      let classes = 'calendar-day';
-      if (dateStr === todayStr) classes += ' today';
-      if (dateStr === currentNoteDate) classes += ' selected';
-      if (notes[dateStr]) classes += ' has-note';
-      html += `<div class="${classes}" onclick="selectDate('${dateStr}')">${d}</div>`;
-    }
-
-    // Next month days
-    const totalCells = firstDay + daysInMonth;
-    const remaining = 42 - totalCells;
-    for (let i = 1; i <= remaining && totalCells + i <= 42; i++) {
-      html += `<div class="calendar-day other-month">${i}</div>`;
-    }
-
-    document.getElementById('calendarDays').innerHTML = html;
+    const rem = 42 - (fd + dim); for(let i=1;i<=rem&&fd+dim+i<=42;i++) h+=`<div class="calendar-day other-month">${i}</div>`;
+    document.getElementById('calendarDays').innerHTML = h;
   }
+  function changeMonth(d) { calendarDate.setMonth(calendarDate.getMonth() + d); renderCalendar(); }
+  function selectDate(d) { openNoteEditor(d); }
 
-  function changeMonth(delta) {
-    calendarDate.setMonth(calendarDate.getMonth() + delta);
-    renderCalendar();
-  }
-
-  function selectDate(dateStr) {
-    openNoteEditor(dateStr);
-  }
   // ==================== NOTES LIST ====================
   function renderNotesList(filter = '') {
-    const listEl = document.getElementById('notesList');
-    const sortedDates = Object.keys(notes).sort((a, b) => b.localeCompare(a));
-    const filtered = filter
-      ? sortedDates.filter(d => {
-          const n = notes[d];
-          return n.title.toLowerCase().includes(filter.toLowerCase()) ||
-                 n.content.toLowerCase().includes(filter.toLowerCase());
-        })
-      : sortedDates;
-
-    if (filtered.length === 0) {
-      listEl.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text3); font-size:13px;">
-        ${filter ? 'No matching entries' : 'No entries yet. Start writing! ✍️'}
+    const el = document.getElementById('notesList');
+    const sorted = Object.keys(notes).sort((a,b) => b.localeCompare(a));
+    const filt = filter ? sorted.filter(d => { const n=notes[d]; return n.title.toLowerCase().includes(filter)||n.content.toLowerCase().includes(filter); }) : sorted;
+    if(!filt.length) { el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px;">${filter?'No matching entries':'No entries yet. Start writing!'}</div>`; return; }
+    el.innerHTML = filt.map(date => {
+      const n = notes[date], d = new Date(date+'T00:00:00');
+      const label = d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      return `<div class="note-item ${date===currentNoteDate?'active':''}" onclick="selectNoteFromList('${date}')">
+        <div class="note-item-date">${label} ${n.mood?`<span style="color:var(--primary)">${MOOD_MAP[n.mood]||''}</span>`:''}</div>
+        <div class="note-item-title">${escHtml(n.title)}</div>
+        <div class="note-item-preview">${escHtml(n.content.substring(0,60))}${n.content.length>60?'...':''}</div>
       </div>`;
-      return;
-    }
-
-    listEl.innerHTML = filtered.map(date => {
-      const n = notes[date];
-      const d = new Date(date + 'T00:00:00');
-      const dateLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-      const isActive = date === editingDate;
-      return `
-        <div class="note-item ${isActive ? 'active' : ''}" onclick="selectNoteFromList('${date}')">
-          <div class="note-item-date">${dateLabel} ${n.mood ? '<span class="tag mood-tag">'+n.mood+'</span>' : ''}</div>
-          <div class="note-item-title">${escapeHtml(n.title)}</div>
-          <div class="note-item-preview">${escapeHtml(n.content.substring(0, 60))}${n.content.length > 60 ? '...' : ''}</div>
-        </div>
-      `;
     }).join('');
   }
-
-  function filterNotes() {
-    const query = document.getElementById('searchInput').value;
-    renderNotesList(query);
-  }
+  function filterNotes() { renderNotesList(document.getElementById('searchInput').value); }
 
   // ==================== MOOD ====================
-  function setMood(mood) {
-    currentMood = currentMood === mood ? '' : mood;
-    updateMoodButtons();
-    updateMoodDisplay();
-  }
-
-  function updateMoodButtons() {
-    document.querySelectorAll('.mood-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.mood === currentMood);    });
-  }
-
-  function updateMoodDisplay() {
-    const el = document.getElementById('noteMoodDisplay');
-    el.innerHTML = currentMood ? `<span class="tag mood-tag">${currentMood} ${currentMood}</span>` : '';
+  function setMood(m) { currentMood = currentMood===m?'':m; updateMoodUI(); }
+  function updateMoodUI() {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.toggle('active', b.dataset.mood===currentMood));
+    document.getElementById('noteMoodDisplay').innerHTML = currentMood ? `<span style="color:var(--primary);font-weight:500;">${MOOD_MAP[currentMood]}</span>` : '';
   }
 
   // ==================== WORD COUNT ====================
   function updateWordCount() {
-    const content = document.getElementById('noteContent').value;
-    const words = content.trim() ? content.trim().split(/\s+/).length : 0;
-    const chars = content.length;
-    document.getElementById('wordCount').textContent = `${words} words · ${chars} characters`;
+    const c = document.getElementById('noteContent').value;
+    const w = c.trim()?c.trim().split(/\s+/).length:0;
+    document.getElementById('wordCount').textContent = `${w} words &middot; ${c.length} characters`;
   }
 
   // ==================== STATS ====================
   function updateStats() {
-    const entries = Object.keys(notes).length;
-    let totalWords = 0;
-    Object.values(notes).forEach(n => {
-      totalWords += n.content.trim() ? n.content.trim().split(/\s+/).length : 0;
-    });
-
-    // Calculate streak
-    let streak = 0;
-    let d = new Date();
-    while (true) {
-      const dateStr = d.toISOString().split('T')[0];
-      if (notes[dateStr]) {
-        streak++;
-        d.setDate(d.getDate() - 1);
-      } else {
-        break;
-      }
-    }
-
-    document.getElementById('totalEntries').textContent = entries;
-    document.getElementById('totalWords').textContent = totalWords > 999 ? (totalWords/1000).toFixed(1)+'k' : totalWords;
+    let tw = 0; Object.values(notes).forEach(n => tw += n.content.trim()?n.content.trim().split(/\s+/).length:0);
+    let streak = 0, d = new Date();
+    while(notes[d.toISOString().split('T')[0]]) { streak++; d.setDate(d.getDate()-1); }
+    document.getElementById('totalEntries').textContent = Object.keys(notes).length;
+    document.getElementById('totalWords').textContent = tw>999?(tw/1000).toFixed(1)+'k':tw;
     document.getElementById('streak').textContent = streak;
   }
 
   // ==================== IMPORT/EXPORT ====================
   function exportData() {
-    const data = {
-      version: '1.0',
-      exportDate: new Date().toISOString(),
-      notes: notes,
-      passwordSet: !!localStorage.getItem('diary_password')
-    };    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `diary-backup-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('Diary exported successfully! 📤', 'success');
+    const data = { version:'1.0', exportDate:new Date().toISOString(), notes, passwordSet:!!localStorage.getItem('diary_password') };
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = `diary-backup-${new Date().toISOString().split('T')[0]}.json`; a.click(); URL.revokeObjectURL(a.href);
+    showToast('Diary exported successfully', 'success');
   }
 
-  function importData(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
+  function importData(e) {
+    const f = e.target.files[0]; if(!f) return;
+    const r = new FileReader();
+    r.onload = function(ev) {
       try {
-        const data = JSON.parse(e.target.result);
-        if (data.notes && typeof data.notes === 'object') {
-          const importedCount = Object.keys(data.notes).length;
-          // Merge: imported notes overwrite existing ones with same date
-          notes = { ...notes, ...data.notes };
-          saveNotesToStorage();
-          renderCalendar();
-          renderNotesList();
-          updateStats();
-          if (currentNoteDate && notes[currentNoteDate]) {
-            openNoteEditor(currentNoteDate);
-          }
-          showToast(`Imported ${importedCount} entries! 📥`, 'success');
-        } else {
-          showToast('Invalid diary file format', 'error');
-        }
-      } catch(err) {
-        showToast('Error reading file: ' + err.message, 'error');
-      }
-    };
-    reader.readAsText(file);
-    event.target.value = '';
+        const d = JSON.parse(ev.target.result);
+        if(d.notes && typeof d.notes==='object') {
+          notes = {...notes, ...d.notes}; saveNotesToStorage(); renderCalendar(); renderNotesList(); updateStats();
+          if(currentNoteDate && notes[currentNoteDate]) openNoteEditor(currentNoteDate);
+          showToast(`Imported ${Object.keys(d.notes).length} entries`, 'success');
+        } else showToast('Invalid diary format', 'error');
+      } catch(err) { showToast('Error reading file: '+err.message, 'error'); }
+    }; r.readAsText(f); e.target.value='';
   }
 
-  // ==================== TOAST ====================
-  function showToast(message, type = 'info') {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
-    toast.innerHTML = `<span>${icons[type] || 'ℹ️'}</span><span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => {      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(40px)';
-      toast.style.transition = 'all 0.3s';
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+  // ==================== TOAST & UI ====================
+  function showToast(msg, type='info') {
+    const c = document.getElementById('toastContainer'), t = document.createElement('div');
+    t.className = `toast ${type}`;
+    const icons = {success:'<i class="fas fa-check-circle"></i>', error:'<i class="fas fa-times-circle"></i>', info:'<i class="fas fa-info-circle"></i>'};
+    t.innerHTML = `${icons[type]||icons.info}<span>${msg}</span>`;
+    c.appendChild(t); setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(20px)'; t.style.transition='all 0.3s'; setTimeout(()=>t.remove(),300); }, 3000);
   }
 
-  // ==================== UTILS ====================
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+  function escHtml(t) { const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
 
-  // ==================== START ====================
+  function setupMobileMenu() {
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mobileNav');
+    btn.addEventListener('click', () => nav.classList.toggle('active'));
+  }
+  function closeMobileMenu() { document.getElementById('mobileNav').classList.remove('active'); }
+
   init();
 </script>
 </body>
